@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 
-export default function DrawCanvas({onPredict}) {
+export default function DrawCanvas({onPredict , onClear}) {
     const canvasRef = useRef(null);
     const [isDrawing , setDrawing] = useState(false);
 
     useEffect (() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d'); // drawer
-        ctx.lineWidth = 12;
+        ctx.lineWidth = 8;
         ctx.lineCap = "round";
         ctx.strokeStyle = "black"; // black drawing
         ctx.fillStyle = "white"; // white background
@@ -17,7 +17,7 @@ export default function DrawCanvas({onPredict}) {
     const startDraw = (e) => {
         const ctx = canvasRef.current.getContext('2d'); // initialize drawer
         ctx.beginPath(); // start drawer
-        ctx.lineWidth = 10
+        ctx.lineWidth = 8
         ctx.moveTo(e.nativeEvent.offsetX , e.nativeEvent.offsetY); // move drawer to mouse position
         setDrawing(true);
     }
@@ -38,12 +38,31 @@ export default function DrawCanvas({onPredict}) {
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = 'white'
         ctx.fillRect(0 , 0 , canvas.height , canvas.width); // fill canvas white
+        onClear(true);
     }
 
     const handlePredict = () => {
-        const dataUrl = canvasRef.current.toDataURL('image/png');
-        onPredict(dataUrl); // send image to predict for backend compute
-    }
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        // dummy 28x28 canvas to resize drawn image
+        const smallCanvas = document.createElement("canvas");
+        smallCanvas.width = 28;
+        smallCanvas.height = 28;
+        const smallCtx = smallCanvas.getContext("2d");
+        smallCtx.drawImage(canvas, 0, 0, 28, 28);
+        const imgData = smallCtx.getImageData(0, 0, 28, 28).data;
+        const binaryPixels = [];
+        const threshold = 128;
+        for (let i = 0; i < imgData.length; i += 4) {
+            const r = imgData[i];
+            const g = imgData[i + 1];
+            const b = imgData[i + 2];
+            const avg = (r + g + b) / 3;
+            binaryPixels.push(avg < threshold ? 1 : 0);
+        }
+
+        onPredict(binaryPixels);
+    };
 
     return (
         <div className="mt-10 flex flex-col items-center">
