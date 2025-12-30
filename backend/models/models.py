@@ -40,7 +40,7 @@ models = {}
 ### Logistic Regression
 class sklearn_logreg(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'log_reg', 'logreg_sklearn.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'log_reg', 'retrained_sklearn_logreg.pkl')
         self.model = joblib.load(path)
     def predict(self, X):
         return self.model.predict(X)
@@ -64,7 +64,7 @@ models["custom_logreg"] = custom_logreg
 ### Naive Bayes
 class sklearn_nb(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'naive_bayes', 'naive_bayes_sklearn.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'naive_bayes', 'retrained_sklearn_nb.pkl')
         self.model = joblib.load(path)
     
     def predict(self, X):
@@ -102,7 +102,7 @@ models["custom_nb"] = custom_nb
 ###Decision_Tree
 class sklearn_DT(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'decision_tree', 'sklearn_DT.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'decision_tree', 'retrained_sklearn_DT.pkl')
         self.model = joblib.load(path)
     
     def predict(self, X):
@@ -130,20 +130,20 @@ models["custom_DT"] = custom_DT
 ### SVM
 class sklearn_SVM(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'SVM', 'sklearn_SVM.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'SVM', 'retrained_sklearn_SVM.pkl')
         self.model = joblib.load(path)
     
     def predict(self, X):
         return self.model.predict(X)
 
 # Add SVM if file exists
-if os.path.exists(os.path.join(BASE_DIR, 'models', 'SVM', 'sklearn_SVM.pkl')):
+if os.path.exists(os.path.join(BASE_DIR, 'models', 'SVM', 'retrained_sklearn_SVM.pkl')):
     models["sklearn_SVM"] = sklearn_SVM
 
 ### Random Forest
 class sklearn_RF(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'random_forest', 'random_forest_sklearn.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'random_forest', 'retrained_sklearn_RF.pkl')
         self.model = joblib.load(path)
     
     def predict(self, X):
@@ -194,7 +194,7 @@ models["custom_RF"] = custom_RF
 ### Gradient Boost
 class sklearn_GB(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'random_forest', 'gbdt_sklearn.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'random_forest', 'retrained_sklearn_GB.pkl')
         try:
             self.model = joblib.load(path)
         except:
@@ -240,7 +240,7 @@ models["custom_GB"] = custom_GB
 ### KNN
 class sklearn_KNN(BaseModel):
     def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'KNN', 'knn_sklearn.pkl')
+        path = os.path.join(BASE_DIR, 'models', 'KNN', 'retrained_sklearn_KNN.pkl')
         self.model = joblib.load(path)
     
     def predict(self, X):

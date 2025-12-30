@@ -1,0 +1,16 @@
+name: digit_classifier
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.9  # Kaggle uses 3.9
+  - scikit-learn==1.2.2
+  - numpy==1.21.6  # Compatible with sklearn 1.2.2
+  - scipy==1.7.3
+  - joblib>=1.1.1
+  - flask==2.0.3  # For backend API
+  - gunicorn==20.1.0  # For Render deployment
+  - pip  # For any pip-only packages
+  - pip:
+      - category-encoders==2.6.3  # If needed, compatible version

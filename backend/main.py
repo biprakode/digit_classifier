@@ -29,7 +29,7 @@ async def load_all():
             try:
                 loaded_models[model_name] = model_class()
             except Exception as e:
-                print(f"✗ Failed to load {model_name}: {e}")
+                print(f"Failed to load {model_name}: {e}")
     except Exception as e:
         print(f"Error during model loading: {e}")
 
