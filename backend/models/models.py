@@ -195,11 +195,12 @@ models["custom_RF"] = custom_RF
 class sklearn_GB(BaseModel):
     def __init__(self):
         path = os.path.join(BASE_DIR, 'models', 'random_forest', 'retrained_sklearn_GB.pkl')
-        try:
-            self.model = joblib.load(path)
+        self.model = joblib.load(path)
+        """try:
+
         except:
             with open(path, 'rb') as f:
-                self.model = pickle.load(f)
+                self.model = pickle.load(f)"""
     
     def predict(self, X):
         return self.model.predict(X)

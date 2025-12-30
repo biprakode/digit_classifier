@@ -1,16 +1,11 @@
 from fastapi import FastAPI , HTTPException
 from pydantic import BaseModel
-from dotenv import load_dotenv
 import joblib, torch
 import numpy as np
 from models import models as model_classes
 from fastapi.middleware.cors import CORSMiddleware
 
-load_dotenv()
 app = FastAPI()
-
-PORT = int(os.getenv("PORT", 10000))
-MODEL_PATH = os.getenv("MODEL_PATH")
 
 app.add_middleware(
     CORSMiddleware,
