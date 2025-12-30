@@ -43,9 +43,11 @@ function App() {
         setIsLoading(false);
     }
 
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
     const handlePredict = async(pixels) => { // send pixel data & model to server
         try {
-            const response = await fetch ('http://localhost:8000/predict' , {
+            const response = await fetch (`${API_BASE}/predict` , {
                 method: 'POST',
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify ({
