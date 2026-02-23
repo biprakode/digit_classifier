@@ -3,7 +3,6 @@ import threading
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import numpy as np
 from models import models as model_classes
@@ -112,16 +111,10 @@ async def health_check():
 
 
 # --- Static file serving for the React SPA ---
+# Mounted apps have lower priority than @app.route() decorators,
+# so /predict, /models, /health are matched first. html=True serves
+# index.html as fallback for unknown paths (SPA client-side routing).
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
 
 if os.path.isdir(STATIC_DIR):
-    # Serve static assets (js, css, images)
-    app.mount("/assets", StaticFiles(directory=os.path.join(STATIC_DIR, "assets")), name="assets")
-
-    @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
-        """Catch-all: serve index.html for any non-API route (SPA routing)."""
-        file_path = os.path.join(STATIC_DIR, full_path)
-        if os.path.isfile(file_path):
-            return FileResponse(file_path)
-        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
