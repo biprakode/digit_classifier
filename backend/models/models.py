@@ -269,14 +269,7 @@ class My_KNN: # classifier
     def predict(self , X_test):
         return np.array([self._find_neighbour(x) for x in X_test])
 
-class custom_KNN(BaseModel):
-    def __init__(self):
-        path = os.path.join(BASE_DIR, 'models', 'KNN', 'my_knn.pkl')
-        with open(path , 'rb') as f:
-            self.knn = pickle.load(f)
-    
-    def predict(self, X):
-        return self.knn.predict(X);
+## custom_KNN removed — model was never successfully fit on MNIST data
 
 ### DNNs
 

@@ -136,26 +136,26 @@ export default function DrawCanvas({onPredict , onClear}) {
     };
 
     return (
-        <div className="mt-10 flex flex-col items-center">
+        <div className="mt-8 flex flex-col items-center">
             <canvas
                 ref = {canvasRef}
-                width={285}
-                height={285}
+                width={320}
+                height={320}
                 onMouseDown={startDraw}
                 onMouseMove={draw}
                 onMouseUp={endDraw}
                 onMouseLeave={endDraw}
-                className="border bg-white rounded-xl shadow-lg"
+                className="border-2 border-sky-200 bg-white rounded-2xl shadow-lg"
             />
-            <div className="flex gap-4 mt-4">
+            <div className="flex gap-5 mt-5">
                 <button
                 onClick={clearCanvas}
-                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+                className="px-6 py-3 text-lg bg-gray-200 rounded-xl hover:bg-gray-300"
                 >Clear</button>
 
                 <button
                 onClick={handlePredict}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                className="px-6 py-3 text-lg bg-blue-500 text-white rounded-xl hover:bg-blue-600"
                 >Predict</button>
             </div>
         </div>

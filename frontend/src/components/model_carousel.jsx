@@ -34,8 +34,8 @@ export default function ModelCarousel({ title, models, onSelect , selectedModel 
     } = useDotButton(emblaApi);
 
     return (
-        <div className="flex flex-col items-center mt-6 w-full max-w-5xl"> {/* Added max-w-5xl here for better centering */}
-            <h2 className="text-2xl font-bold mb-4">{title}</h2>
+        <div className="flex flex-col items-center mt-8 w-full max-w-5xl">
+            <h2 className="text-3xl font-bold mb-5">{title}</h2>
             
             <section className="embla w-full">
                 {/* Embla Viewport (ref container) */}
@@ -47,7 +47,7 @@ export default function ModelCarousel({ title, models, onSelect , selectedModel 
                             // Embla Slide (applying padding/margin and flex properties)
                             <div 
                                 className="embla__slide flex-none px-4 py-2" 
-                                style={{minWidth: '280px'}} 
+                                style={{minWidth: '310px'}} 
                                 key={model.name}
                             >
                                 <ModelCard 
